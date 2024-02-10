@@ -2,18 +2,19 @@
 need to find the market price of upgrade FROM 300i TO 135c within last month
 then extend search to previous 6 months
 """
-#%%
+
+# %%
 import requests
 import bs4 as bs
 import pandas as pd
 from datetime import datetime, timedelta
 
-ccus = pd.read_csv("ccus_2023-01-16.csv", header=0)
+ccus = pd.read_csv(r"required_inputs/ccus_2023-01-16.csv", header=0)
 
 unique_ships = ccus["to"].unique().tolist()
 print(unique_ships)
 
-#%%
+# %%
 summary_list = []
 # start loop through all ships here
 for ship in unique_ships[:10]:
@@ -130,20 +131,4 @@ while saved == False:
         output_df.to_csv("mr_fats_prices.csv", index=False)
         saved = True
     except:
-        print("Close the fucking csv...")
-
-
-#%%
-
-"""
-put all unique to / from into separate dataframe (convert dates to datetime for last month / 6 months average?)
-take max / min / month av / 6 month av / anything else from those dataframes
-
-store in master dataframe with all to / from values taken from CSV
-output to csv
-
-extend to all pages
-extend to all in ccu csv
-"""
-
-# %%
+        print("Close the csv...")
